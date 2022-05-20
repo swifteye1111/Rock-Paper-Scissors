@@ -26,7 +26,12 @@
         // game function calls playRound function until player or computer wins 5 rounds;
         //   keeps track of score visually
         //   reports winner or loser
+        
         // Get choice from user
+        playerChoice = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
+        while (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
+            playerChoice = prompt("Invalid response. Please input only \"rock\", \"paper\", or \"scissors.\"");
+        }
 
 
     </script>
