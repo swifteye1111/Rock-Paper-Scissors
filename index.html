@@ -37,33 +37,60 @@
         }
 
         // playRound function takes playerSelection and computerSelection parameters
-        //   returns 1 if player wins, 0 if computer wins
         //   if player wins, publish 'You Win! [playerSelection] beats [computerSelection]!' 
         //   if computer wins, publish 'You lose! [computerselection] beats [playerSelection]!'
+        //   Keeps count of player and computer score.
         function playRound (player, comp) {
             if (player === comp) return `Tie! You both picked ${player}!`;
             else if (player === "rock") {
-                if (comp === "paper") return "You lose! Paper beats rock!";
-                else return "You win! Rock beats scissors!";
+                if (comp === "paper") {
+                    computerScore++;
+                    return "You lose! Paper beats rock!";
+                }
+                else {
+                    playerScore++;
+                    return "You win! Rock beats scissors!";
+                }
             } else if (player === "paper") {
-                if (comp === "rock") return "You win! Paper beats rock!";
-                else return "You lose! Scissors beats paper!";
+                if (comp === "rock") {
+                    playerScore++;
+                    return "You win! Paper beats rock!";
+                }
+                else {
+                    computerScore++;
+                    return "You lose! Scissors beats paper!";
+                }
             } else if (player === "scissors") {
-                if (comp === "rock") return "You lose! Rock beats scissors!";
-                else return "You win! Scissors beats paper!";
+                if (comp === "rock") {
+                    computerScore++;
+                    return "You lose! Rock beats scissors!";
+                }
+                else {
+                    playerScore++;
+                    return "You win! Scissors beats paper!";
+                }
             } else return "Invalid input. Please choose rock, paper, or scissors.";
         }
-        // Test playRound
-        playerChoice = getPlayerChoice();
-        computerChoice = getComputerChoice();
-        console.log(playRound(playerChoice, computerChoice));
 
-        // game funon calls playRound function until player or computer wins 5 rounds;
+        // game function calls playRound function until player or computer wins 5 rounds;
         //   keeps track of score visually
         //   reports winner or loser
-        
+        function game () {
+            for (let i=0; i<5; i++) {
+                playerChoice = getPlayerChoice();
+                computerChoice = getComputerChoice();
+                
+                console.log(playRound(playerChoice, computerChoice));
+                console.log(`Player score: ${playerScore}.\nComputer score: ${computerScore}.`);
+            }
+            if (playerScore > computerScore) {
+                console.log(`You won ${playerScore} to ${computerScore}.`);
+            } else if (playerScore === computerScore) {
+                console.log(`You tied ${playerScore} to ${computerScore}.`);
+            } else console.log(`You lost ${playerScore} to ${computerScore}.`);
+        }
 
-
+        game();
 
     </script>
 </body>
