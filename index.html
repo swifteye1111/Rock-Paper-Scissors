@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
@@ -16,6 +16,13 @@
 
         // Get choice from computer: 
         // computerPlay function randomly returns 'Rock,' 'Paper,' or 'Scissors'
+        function getComputerChoice () {
+            let choice = Math.floor(Math.random() * 3);
+            return choice;
+        }
+        console.log(getComputerChoice());
+        console.log(getComputerChoice());
+        console.log(getComputerChoice());
 
         // playRound function takes playerSelection and computerSelection parameters
         //   returns 1 if player wins, 0 if computer wins
@@ -28,9 +35,12 @@
         //   reports winner or loser
         
         // Get choice from user
-        playerChoice = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
-        while (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
-            playerChoice = prompt("Invalid response. Please input only \"rock\", \"paper\", or \"scissors.\"");
+        function getPlayerChoice (choice) {
+            choice = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
+            while (choice != "rock" && choice != "paper" && choice != "scissors") {
+                choice = prompt("Invalid response. Please input only \"rock\", \"paper\", or \"scissors.\"");
+            }
+            return choice;
         }
 
 
