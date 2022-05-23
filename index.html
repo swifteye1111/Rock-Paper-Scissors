@@ -39,10 +39,26 @@
         // playRound function takes playerSelection and computerSelection parameters
         //   returns 1 if player wins, 0 if computer wins
         //   if player wins, publish 'You Win! [playerSelection] beats [computerSelection]!' 
-        //   if computer wins, publish 'You Lose! [computerselection] beats [playerSelection]'
-        //   playerSelection is not case sensitive.
+        //   if computer wins, publish 'You lose! [computerselection] beats [playerSelection]!'
+        function playRound (player, comp) {
+            if (player === comp) return `Tie! You both picked ${player}!`;
+            else if (player === "rock") {
+                if (comp === "paper") return "You lose! Paper beats rock!";
+                else return "You win! Rock beats scissors!";
+            } else if (player === "paper") {
+                if (comp === "rock") return "You win! Paper beats rock!";
+                else return "You lose! Scissors beats paper!";
+            } else if (player === "scissors") {
+                if (comp === "rock") return "You lose! Rock beats scissors!";
+                else return "You win! Scissors beats paper!";
+            } else return "Invalid input. Please choose rock, paper, or scissors.";
+        }
+        // Test playRound
+        playerChoice = getPlayerChoice();
+        computerChoice = getComputerChoice();
+        console.log(playRound(playerChoice, computerChoice));
 
-        // game function calls playRound function until player or computer wins 5 rounds;
+        // game funon calls playRound function until player or computer wins 5 rounds;
         //   keeps track of score visually
         //   reports winner or loser
         
