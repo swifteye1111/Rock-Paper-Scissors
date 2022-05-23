@@ -18,11 +18,13 @@
         // computerPlay function randomly returns 'Rock,' 'Paper,' or 'Scissors'
         function getComputerChoice () {
             let choice = Math.floor(Math.random() * 3);
-            return choice;
+            if (choice === 0) {
+                return "Rock";
+            } else if (choice === 1) {
+                return "Paper";
+            } else return "Scissors";
         }
-        console.log(getComputerChoice());
-        console.log(getComputerChoice());
-        console.log(getComputerChoice());
+        
 
         // playRound function takes playerSelection and computerSelection parameters
         //   returns 1 if player wins, 0 if computer wins
