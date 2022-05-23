@@ -15,16 +15,26 @@
         let computerScore = 0;
 
         // Get choice from computer: 
-        // computerPlay function randomly returns 'Rock,' 'Paper,' or 'Scissors'
+        // computerPlay function randomly returns 'rock,' 'paper,' or 'scissors'
         function getComputerChoice () {
+            // Randomly select 0, 1, or 2
             let choice = Math.floor(Math.random() * 3);
+            // Choose rock, paper, or scissors based on random number.
             if (choice === 0) {
-                return "Rock";
+                return "rock";
             } else if (choice === 1) {
-                return "Paper";
-            } else return "Scissors";
+                return "paper";
+            } else return "scissors";
         }
-        
+
+        // Get choice from user
+        function getPlayerChoice () {
+            let choice = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
+            while (choice != "rock" && choice != "paper" && choice != "scissors") {
+                choice = prompt("Invalid response. Please input only \"rock\", \"paper\", or \"scissors.\"");
+            }
+            return choice;
+        }
 
         // playRound function takes playerSelection and computerSelection parameters
         //   returns 1 if player wins, 0 if computer wins
@@ -36,14 +46,7 @@
         //   keeps track of score visually
         //   reports winner or loser
         
-        // Get choice from user
-        function getPlayerChoice (choice) {
-            choice = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
-            while (choice != "rock" && choice != "paper" && choice != "scissors") {
-                choice = prompt("Invalid response. Please input only \"rock\", \"paper\", or \"scissors.\"");
-            }
-            return choice;
-        }
+
 
 
     </script>
