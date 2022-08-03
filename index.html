@@ -7,9 +7,9 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <button></button>
-    <button></button>
-    <button></button>
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
 
     <script>
         // Initialize variables playerChoice, computerChoice, playerScore, computerScore
@@ -31,14 +31,23 @@
             } else return "scissors";
         }
 
-        // Get choice from user
-        function getPlayerChoice () {
+        // Get choice from user via prompts
+        /*function getPlayerChoice () {
             let choice = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
             while (choice != "rock" && choice != "paper" && choice != "scissors") {
                 choice = prompt("Invalid response. Please input only \"rock\", \"paper\", or \"scissors.\"");
             }
             return choice;
+        }*/
+
+        function getPlayerChoice () {
+            buttons.forEach(button => button.addEventListener('click', () =>
+                    {
+                        return button.className;
+                    }
+                ));
         }
+        
 
         // playRound function takes playerSelection and computerSelection parameters
         //   if player wins, publish 'You Win! [playerSelection] beats [computerSelection]!' 
@@ -81,11 +90,23 @@
         //   reports winner or loser
         function game () {
             //for (let i=0; i<5; i++) {
-                playerChoice = getPlayerChoice();
-                computerChoice = getComputerChoice();
-                
-                console.log(playRound(playerChoice, computerChoice));
-                console.log(`Player score: ${playerScore}.\nComputer score: ${computerScore}.`);
+                // playerChoice = getPlayerChoice();
+                //computerChoice = getComputerChoice();
+
+                buttons.forEach(button => button.addEventListener('click', () =>
+                    {
+                        playerChoice = button.className;
+                        computerChoice = getComputerChoice();
+
+                        console.log(playRound(playerChoice,computerChoice));
+                    }
+                ));
+                //console.log(playerChoice);
+                //console.log(computerChoice);
+
+
+                //console.log(playRound(playerChoice, computerChoice));
+                //console.log(`Player score: ${playerScore}.\nComputer score: ${computerScore}.`);
             // }
             if (playerScore > computerScore) {
                 console.log(`You won ${playerScore} to ${computerScore}.`);
@@ -93,6 +114,8 @@
                 console.log(`You tied ${playerScore} to ${computerScore}.`);
             } else console.log(`You lost ${playerScore} to ${computerScore}.`);
         }
+
+        const buttons = document.querySelectorAll("button");
 
         game();
 
