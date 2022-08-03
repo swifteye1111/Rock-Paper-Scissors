@@ -76,13 +76,13 @@
         //   keeps track of score visually
         //   reports winner or loser
         function game () {
-            for (let i=0; i<5; i++) {
+            //for (let i=0; i<5; i++) {
                 playerChoice = getPlayerChoice();
                 computerChoice = getComputerChoice();
                 
                 console.log(playRound(playerChoice, computerChoice));
                 console.log(`Player score: ${playerScore}.\nComputer score: ${computerScore}.`);
-            }
+            // }
             if (playerScore > computerScore) {
                 console.log(`You won ${playerScore} to ${computerScore}.`);
             } else if (playerScore === computerScore) {
