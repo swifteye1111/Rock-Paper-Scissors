@@ -11,12 +11,16 @@
     <button class="paper">Paper</button>
     <button class="scissors">Scissors</button>
 
+    <div class="results"></div>
+
     <script>
         // Initialize variables playerChoice, computerChoice, playerScore, computerScore
         let playerChoice = '';
         let computerChoice = '';
         let playerScore = 0;
         let computerScore = 0;
+        let result = '';
+        let finished = false;
 
         // Get choice from computer: 
         // computerPlay function randomly returns 'rock,' 'paper,' or 'scissors'
@@ -31,24 +35,18 @@
             } else return "scissors";
         }
 
-        // Get choice from user via prompts
-        /*function getPlayerChoice () {
-            let choice = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
-            while (choice != "rock" && choice != "paper" && choice != "scissors") {
-                choice = prompt("Invalid response. Please input only \"rock\", \"paper\", or \"scissors.\"");
-            }
-            return choice;
-        }*/
+        function disableButtons() {
+            buttons.forEach(elem => {
+                elem.disabled = true;
+            })
+        }   
 
-        function getPlayerChoice () {
-            buttons.forEach(button => button.addEventListener('click', () =>
-                    {
-                        return button.className;
-                    }
-                ));
+        function enableButtons() {
+            buttons.forEach(elem => {
+                elem.disabled = false;
+            })
         }
         
-
         // playRound function takes playerSelection and computerSelection parameters
         //   if player wins, publish 'You Win! [playerSelection] beats [computerSelection]!' 
         //   if computer wins, publish 'You lose! [computerselection] beats [playerSelection]!'
@@ -85,38 +83,56 @@
             } else return "Invalid input. Please choose rock, paper, or scissors.";
         }
 
+        function createParagWithText(text) {
+            const p = document.createElement('p');
+            p.textContent = text;
+
+            return p;
+        }
+
         // game function calls playRound function until player or computer wins 5 rounds;
         //   keeps track of score visually
         //   reports winner or loser
+        //   invites player to play again
         function game () {
-            //for (let i=0; i<5; i++) {
-                // playerChoice = getPlayerChoice();
-                //computerChoice = getComputerChoice();
+                buttons.forEach(button => button.addEventListener('click', () => 
+                {
+                if (playerScore < 5 && computerScore < 5) {
+                        div.innerHTML = '';
 
-                buttons.forEach(button => button.addEventListener('click', () =>
-                    {
                         playerChoice = button.className;
                         computerChoice = getComputerChoice();
 
-                        console.log(playRound(playerChoice,computerChoice));
+                        div.appendChild(createParagWithText(playRound(playerChoice,computerChoice)));
+                        div.appendChild(createParagWithText(`Player score: ${playerScore}`));
+                        div.appendChild(createParagWithText(`Computer score: ${computerScore}.`));
+
+                        if (playerScore === 5 || computerScore === 5) {
+                            if (playerScore > computerScore) {
+                                result = `You won ${playerScore} to ${computerScore}.`;
+                                } else result = `You lost ${playerScore} to ${computerScore}.`;
+                            
+                            div.appendChild(createParagWithText(result));
+                            disableButtons();
+                            let againBtn = document.createElement('button');
+                            againBtn.textContent = 'Play again!';
+                            
+                            againBtn.addEventListener('click', () => {
+                                div.innerHTML = '';
+                                enableButtons();
+                            })
+                            div.appendChild(againBtn);
+                            
+                            playerScore = 0;
+                            computerScore = 0;
+                        }
                     }
-                ));
-                //console.log(playerChoice);
-                //console.log(computerChoice);
-
-
-                //console.log(playRound(playerChoice, computerChoice));
-                //console.log(`Player score: ${playerScore}.\nComputer score: ${computerScore}.`);
-            // }
-            if (playerScore > computerScore) {
-                console.log(`You won ${playerScore} to ${computerScore}.`);
-            } else if (playerScore === computerScore) {
-                console.log(`You tied ${playerScore} to ${computerScore}.`);
-            } else console.log(`You lost ${playerScore} to ${computerScore}.`);
-        }
+        }));
+    }
 
         const buttons = document.querySelectorAll("button");
-
+        const div = document.querySelector("div");
+        
         game();
 
     </script>
